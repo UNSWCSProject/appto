@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<title>Wayfinding Demo</title>
+		
+	<link href="css_js/jquery-ui.css" media="all" rel="stylesheet" type="text/css"/>
+	
+	<script src="css_js/jquery.js" type="text/javascript"></script>
+	<script src="css_js/jquery-ui.js" type="text/javascript"></script>
+	
+	<script src="css_js/jquery.svg/jquery.svg.js" type="text/javascript"></script>
+	<script src="css_js/jquery.svg/jquery.svgdom.js" type="text/javascript"></script>
+	<script src="css_js/jquery.svg/jquery.svganim.js" type="text/javascript"></script>
+
+	<script src="css_js/jquery.metadata.js" type="text/javascript"></script>
+
+	<script src="css_js/jquery.wayfinding.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+	
+	/*jslint white: true, onevar: true, nomen: true, eqeqeq: true, bitwise: true, regexp: true, newcap: true, immed: true, maxerr: 100 */
+	
+	//	<![CDATA[
+	
+		$(document).ready(function () {
+			$("#myMaps").wayfinding({
+				'maps': [
+					{'path': 'demo_map_1.svg', 'id': 'floor1'},
+					{'path': 'demo_map_2.svg', 'id': 'floor2'}
+				],
+				'path': {
+					width: 3,
+					color: 'cyan',
+					radius: 8,
+					speed: 8
+				},
+				'startpoint': function() {
+					return 'lcd.1';
+				},
+				'defaultMap': 'floor1'
+			});
+
+			//make the three buttons clickable
+			$("#controls button").click(function () {
+				$("#myMaps").wayfinding('currentMap',$(this).attr('id'));
+			});
+			$("#controls #beginSelect").change(function () {
+				$("#myMaps").wayfinding('startpoint', $(this).val());
+				if ($("#controls .endSelect").val() !== '') {
+					$("#myMaps").wayfinding('routeTo', $("#controls #endSelect").val());
+				}
+			});
+			$("#controls #endSelect").change(function () {
+				$("#myMaps").wayfinding('routeTo', $(this).val());
+			});
+			$("#controls #accessible").change(function () {
+				if ($("#controls #accessible:checked").val() !== undefined) {
+					$("#myMaps").wayfinding('accessibleRoute', true);
+				} else {
+					$("#myMaps").wayfinding('accessibleRoute', false);
+				}
+				$("#myMaps").wayfinding('routeTo', $("#controls #endSelect").val());
+			});
+
+			$("#Rooms a").live('click', function () {
+				$("#controls #endSelect option[value='" + $(this).attr('id') + "']").attr("selected", true);
+			});
+			
+		}); // close document ready
+	//	]]>
+	</script>
+	
+	<style>
+		body{
+			background-color: white;
+			height: 540px;
+			width: 960px;
+			font-family: Arial;
+			font-size: 24px;
+			border: 1px solid black;
+		}
+
+		a img {
+			border: none;
+		}
+	
+		#controls {
+			display: block;
+			height: 50px;
+			width: 950px;
+			background-color: lightGrey;
+			z-index:-1;
+			padding: 10px 0 0 10px;
+		}
+		div#myMaps {
+			height: 480px;
+			width: 785px;
+			padding-left: 175px;
+		}
+		div#myMaps div {
+			display: inline-block;
+			height: 480px;
+			width: 600px;
+		}
+		div#mapLoading {
+			position: absolute;
+			font-size: 10em;
+			z-index: -1;
+			top: 60px;
+			left: 50px;
+		}
+		
+		.wayfindingRoom {
+			fill: #ffc;
+			stroke: blue;
+			stroke-width: 2;
+			stroke-dasharray: 5 3
+		}
+		
+	</style>
+
+</head>
+<body>
+	<div id="content">
+		<div id="mapLoading">Loading</div>
+		<div id="myMaps">
+		</div>
+		<div id="controls">
+			<label>Show</label>
+			<button id="floor1">1st Floor</button>
+			<button id="floor2">2nd Floor</button>
+			<label for="beginSelect">Begin Route at</label>
+			<select id="beginSelect">
+				<option value="lcd.1">Reception</option>
+				<option value="lobby">Lobby</option>
+				<option value="R123">Conf Room</option>
+                <option disabled="true">West 1st</option>
+				<option value="R101">101</option>
+				<option value="R102">102</option>
+				<option value="R103">103</option>
+				<option value="R104">104</option>
+				<option disabled="true">East 1st</option>
+				<option value="R111">111</option>
+				<option value="R112">112</option>
+				<option value="R113">113</option>
+				<option value="R114">114</option>
+				<option disabled="true">North 1st</option>
+				<option value="R121">121</option>
+				<option value="R122">122</option>
+				<option value="R123">123</option>
+				<option value="R124">124</option>
+				<option value="R125">125</option>
+				<option disabled="true">2nd</option>
+				<option value="R201">201</option>
+				<option value="R202">202</option>
+			</select>				
+			<label for="endSelect">Show Route to</label>
+			<select id="endSelect">
+				<option></option>
+				<option disabled="true">West 1st</option>
+				<option value="R101">101</option>
+				<option value="R102">102</option>
+				<option value="R103">103</option>
+				<option value="R104">104</option>
+				<option disabled="true">East 1st</option>
+				<option value="R111">111</option>
+				<option value="R112">112</option>
+				<option value="R113">113</option>
+				<option value="R114">114</option>
+				<option disabled="true">North 1st</option>
+				<option value="R121">121</option>
+				<option value="R122">122</option>
+				<option value="R123">123</option>
+				<option value="R124">124</option>
+				<option value="R125">125</option>
+				<option disabled="true">2nd</option>
+				<option value="R201">201</option>
+				<option value="R202">202</option>
+			</select>
+			<label for="accessible">Accessible</label>
+			<input id="accessible" type="checkbox" name="accessible" value="Accessible" />
+		</div>
+       
+	</div>
+</body>
+</html>

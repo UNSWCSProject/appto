@@ -1,0 +1,40 @@
+
+.mappage body{
+			background-color: white;
+			height: 540px;
+			width: 960px;
+			font-family: Arial;
+			font-size: 24px;
+			border: 1px solid black;
+		}
+
+
+.mappage 		a img {
+			border: none;
+		}
+.mappage 		div#myMaps {
+    		position: absolute;
+			height: 480px;
+			width: 785px;
+			padding-left: 175px;
+		}
+.mappage 		div#myMaps div {
+			display: inline-block;
+			height: 480px;
+			width: 600px;
+		}
+.mappage 		div#mapLoading {
+			position: absolute;
+			font-size: 10em;
+			z-index: -1;
+			top: 60px;
+			left: 50px;
+		}
+		
+.mappage 		.wayfindingRoom {
+			fill: #ffc;
+			stroke: blue;
+			stroke-width: 2;
+			stroke-dasharray: 5 3
+		}
+		
