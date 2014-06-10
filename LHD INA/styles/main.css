@@ -31,6 +31,12 @@
     clear: both;
 }
 
+/*Added Styles*/
+.centrebanner {
+	text-align:center
+}
+
+
 /* MAP STYLES*/
 #page-location-content {
     position: absolute;
